@@ -20,21 +20,14 @@ five_star_weapons = [
     "Skyward Blade"
 ]
 
-limited_banner = [
-
-]
-
 def exec_gacha(charname, banner, pull_num):
     pull_counter = 0
     soft_pity = 0
     hard_pity = 0
     pull_banner = []
-    if(banner == "s"):
+    if(banner == "s" or banner == "l"):
         soft_pity = 75
         pull_banner = five_star_chars
-    if(banner == "l"):
-        soft_pity = 75
-        pull_banner = limited_banner
     if(banner == "w"):
         soft_pity = 65
         pull_banner = five_star_weapons
@@ -44,6 +37,8 @@ def exec_gacha(charname, banner, pull_num):
     if(charname):
         five_star_chars[-1] = charname
     
+    print(five_star_chars)
+
     while(pull_counter < pull_num):
         time.sleep(0.85)
         print("Pulling...")
