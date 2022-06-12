@@ -1,6 +1,6 @@
 import sys, random, time
 
-standard_five_stars = [
+five_star_chars = [
     "Diluc",
     "Jean",
     "Keqing",
@@ -31,7 +31,7 @@ def exec_gacha(charname, banner, pull_num):
     pull_banner = []
     if(banner == "s"):
         soft_pity = 75
-        pull_banner = standard_five_stars
+        pull_banner = five_star_chars
     if(banner == "l"):
         soft_pity = 75
         pull_banner = limited_banner
@@ -41,6 +41,9 @@ def exec_gacha(charname, banner, pull_num):
 
     hard_pity = soft_pity + 15
 
+    if(charname):
+        five_star_chars[-1] = charname
+    
     while(pull_counter < pull_num):
         time.sleep(0.85)
         print("Pulling...")
@@ -66,10 +69,10 @@ def print_usage():
     return("Usage: python3 main.py [-s, -l charname, -w]  <number of rolls>\n\n(-s for standard, -l for limited, -w for weapon) ")
      
 def main():
-    try:
-        if (not len(sys.argv) >= 3 or len(sys.argv) > 4):
-            print_usage()
-            sys.exit(1)
+    if (not len(sys.argv) >= 3 or len(sys.argv) > 4):
+        print(print_usage())
+        sys.exit(1)
+    if(sys.argv[1] == "-s" or sys.argv[1] == "-l" or sys.argv[1] == "-w"):
         charname = ""
         pull_num = 0
         if(sys.argv[1] == "-l"):
@@ -79,11 +82,11 @@ def main():
             pull_num = int(sys.argv[2])
         banner = sys.argv[1][1]
         print(exec_gacha(charname, banner, pull_num))
-
         sys.exit(0)
-    except:
-        print_usage()
+    else:
+        print(print_usage())
         sys.exit(1)
+
     
     #print("number of arguments : ", len(sys.argv))
     #print("arguments : ", str(sys.argv))
