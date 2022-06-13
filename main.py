@@ -1,24 +1,32 @@
-import sys, random, time
+# ---------------------------------------------------------------------------
+"""
+main.py: The main source file to execute the gacha
 
-five_star_chars = [
-    "Diluc",
-    "Jean",
-    "Keqing",
-    "Mona",
-    "Qiqi"
-]
+This program is designed to be used as a command line tool to execute a "gacha" using characters and weapons from the Genshin Impact universe.
+For compilation and execution of this program:
 
-five_star_weapons = [
-    "Amos' Bow",
-    "Skyward Harp",
-    "Lost Prayer to the Sacred Winds",
-    "Skyward Atlas",
-    "Skyward Pride",
-    "Wolf's Gravestone",
-    "Skyward Spine",
-    "Aquila Favonia",
-    "Skyward Blade"
-]
+    $ python3 main.py [-s, -l charname, -w]  <number of rolls>
+
+    - where:
+        -s = standard banner
+        -l charname = limited banner with character name given
+        -w = weapon banner
+    
+    Example:
+        $ python3 main.py -s 40
+        $ python3 main.py -l Yelan 50
+        $ python3 main.py -w 60
+
+@Author: Spelljinxer
+@Credit: The name of the characters, weapons and other related assets do not belong to me. They are the sole property of Hoyoverse and respective owners.
+@Status: Development
+"""
+# ---------------------------------------------------------------------------
+
+
+import sys, random, time, json
+from banners import five_star_chars, five_star_weapons
+from inventory_parsing import read_inventory, reset_inventory
 
 def exec_gacha(charname, banner, pull_num):
     pull_counter = 0
@@ -37,7 +45,6 @@ def exec_gacha(charname, banner, pull_num):
     if(charname):
         five_star_chars[-1] = charname
     
-    print(five_star_chars)
 
     while(pull_counter < pull_num):
         time.sleep(0.85)
@@ -62,7 +69,7 @@ def exec_gacha(charname, banner, pull_num):
 
 def print_usage():
     return("Usage: python3 main.py [-s, -l charname, -w]  <number of rolls>\n\n(-s for standard, -l for limited, -w for weapon) ")
-     
+
 def main():
     if (not len(sys.argv) >= 3 or len(sys.argv) > 4):
         print(print_usage())
@@ -77,15 +84,13 @@ def main():
             pull_num = int(sys.argv[2])
         banner = sys.argv[1][1]
         print(exec_gacha(charname, banner, pull_num))
+        # write_to_inventory(random.choice(five_star_chars))
+        # reset_inventory()
+        read_inventory()
         sys.exit(0)
     else:
         print(print_usage())
         sys.exit(1)
-
-    
-    #print("number of arguments : ", len(sys.argv))
-    #print("arguments : ", str(sys.argv))
-    #print(str(sys.argv[1]))
 
 if __name__ == "__main__":
     main()
