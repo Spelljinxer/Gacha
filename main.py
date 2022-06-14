@@ -26,7 +26,7 @@ For compilation and execution of this program:
 
 import sys, random, time, json
 from banners import five_star_chars, five_star_weapons
-from inventory_parsing import read_inventory, reset_inventory
+from inventory_parsing import read_inventory, reset_inventory, write_to_inventory
 
 def exec_gacha(charname, banner, pull_num):
     pull_counter = 0
@@ -83,10 +83,17 @@ def main():
         else:
             pull_num = int(sys.argv[2])
         banner = sys.argv[1][1]
-        print(exec_gacha(charname, banner, pull_num))
+        #print(exec_gacha(charname, banner, pull_num))
         # write_to_inventory(random.choice(five_star_chars))
         # reset_inventory()
+
+        write_to_inventory("Characters", "five_stars_chars", random.choice(five_star_chars))
+        write_to_inventory("Weapons", "five_stars_weapons", random.choice(five_star_weapons))
+        print("\n")
+
+
         read_inventory()
+
         sys.exit(0)
     else:
         print(print_usage())

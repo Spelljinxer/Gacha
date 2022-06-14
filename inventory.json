@@ -2,11 +2,15 @@
     "AccountName": "Lorem",
     "Primogems": 0,
     "Characters": {
-        "five_stars_chars": [],
+        "five_stars_chars": [
+
+        ],
         "four_stars_chars": []
     },
     "Weapons": {
-        "five_stars_weapons": [],
+        "five_stars_weapons": [
+
+        ],
         "four_stars_weapons": [],
         "three_stars_weapons": []
     }
