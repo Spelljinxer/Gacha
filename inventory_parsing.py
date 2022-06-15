@@ -31,11 +31,11 @@ def read_inventory():
         #read the "Characters"
         data = json.load(f)
         ret = data["Characters"]
-        print(ret)
+        print("Characters you own: ", ret)
 
         #read the "Weapons"
         weps = data["Weapons"]
-        print(weps)
+        print("Weapons you own: ", weps)
 
 def write_to_inventory(item_type, rarity, item):
     with open("inventory.json", "r+") as f:

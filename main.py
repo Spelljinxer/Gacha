@@ -25,8 +25,9 @@ For compilation and execution of this program:
 
 
 import sys, random, time, json
-from banners import five_star_chars, five_star_weapons
+from banners import five_star_chars, five_star_weapons, four_star_chars, four_star_weapons, three_star_weapons
 from inventory_parsing import read_inventory, reset_inventory, write_to_inventory
+
 
 def exec_gacha(charname, banner, pull_num):
     pull_counter = 0
@@ -45,30 +46,44 @@ def exec_gacha(charname, banner, pull_num):
     if(charname):
         five_star_chars[-1] = charname
     
+    four_star_pity = 10
 
     while(pull_counter < pull_num):
-        time.sleep(0.85)
         print("Pulling...")
-        gacha_rate = random.uniform(0.0000, 1.000)
+        time.sleep(0.5)
+        gacha_rate = random.uniform(0.0000, 1.00)
         
-
         #going to need to fix these to correspond with the actual genshin rates (math dansgame):
             #https://www.reddit.com/r/Genshin_Impact/comments/jo9d9d/the_5_rate_is_not_uniform_06_there_is_a_soft_pity/
             #https://genshin-impact.fandom.com/wiki/Cumulative_Probability 
+            #https://genshin-impact.fandom.com/wiki/Wishes/Expanded_Wish_Probabilities
+
         if(gacha_rate <= 0.0006):
             print("Congratulations! You got: ", random.choice(pull_banner))
             break
+        
+        if(gacha_rate <= 0.027):
+            print("four star pulled\n")
+            pass
+        
+        if(pull_counter == four_star_pity):
+            print("hard 4 star pity\n")
+            
 
-        pull_counter += 1
         if(pull_counter == hard_pity):
             print("You've reached Hard Pity. You got: ", random.choice(pull_banner))
             break
         
+        else:
+            write_to_inventory("Weapons", "three_stars_weapons", random.choice(three_star_weapons))
+        
+        pull_counter += 1
     
-    pass #is this really needed??
+    pass 
 
 def print_usage():
     return("Usage: python3 main.py [-s, -l charname, -w]  <number of rolls>\n\n(-s for standard, -l for limited, -w for weapon) ")
+
 
 def main():
     if (not len(sys.argv) >= 3 or len(sys.argv) > 4):
@@ -83,16 +98,32 @@ def main():
         else:
             pull_num = int(sys.argv[2])
         banner = sys.argv[1][1]
-        #print(exec_gacha(charname, banner, pull_num))
-        # write_to_inventory(random.choice(five_star_chars))
-        # reset_inventory()
+        print(exec_gacha(charname, banner, pull_num))
 
-        write_to_inventory("Characters", "five_stars_chars", random.choice(five_star_chars))
-        write_to_inventory("Weapons", "five_stars_weapons", random.choice(five_star_weapons))
-        print("\n")
+        s = input("Do you wish to see your current inventory? (y/n)\n")
 
+        if(s == "y"):
+            print("\n")
+            read_inventory()
+        else:
+            pass
 
-        read_inventory()
+        d = input("Do you wish to reset your inventory? (y/n)\n")
+        if(d == "y"):
+            print("\n")
+            reset_inventory()
+            time.sleep(0.5)
+            print("Inventory reset.")
+            print("\n")
+            read_inventory()
+        else:
+            pass
+       
+        # ------------------- testing writing/reading to inventory.json -------------------
+        # write_to_inventory("Characters", "five_stars_chars", random.choice(five_star_chars))
+        # write_to_inventory("Weapons", "five_stars_weapons", random.choice(five_star_weapons))
+        # print("\n")
+        # read_inventory()
 
         sys.exit(0)
     else:

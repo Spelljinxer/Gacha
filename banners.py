@@ -61,6 +61,44 @@ five_star_weapons = [
     "Skyward Blade"
 ]
 
+four_star_weapons = [
+    "Blackcliff Longsword",
+    "Favonius Sword",
+    "Iron Sting",
+    "Lion's Roar",
+    "The Flute",
+    "Sacrificial Sword",
+    "The Alley Flash",
+    "Royal Greatsword",
+    "Blackcliff Slasher",
+    "Favonius Greatsword",
+    "The Bell",
+    "Sacrificial Greatsword",
+    "Rainslasher",
+    "Whiteblind",
+    "Deathmatch",
+    "Blackcliff Pole",
+    "Royal Spear",
+    "Kitain Cross Spear",
+    "Lithic Spear",
+    "Dragon's Bane",
+    "Favonius Lance",
+    "Crescent Pike",
+    "Royal Bow",
+    "Blackcliff Warbow",
+    "Predator",
+    "Favonius Warbow",
+    "Sacrificial Bow",
+    "Rust",
+    "Alley Hunter",
+    "Compound Bow",
+    "Favonius Codex",
+    "The Widsith",
+    "Sacrificial Fragments",
+    "Eye of Perception",
+    "Mappa Mare"
+]
+
 three_star_weapons = [
     "Amber Catalyst",
     "Black Tassel",
