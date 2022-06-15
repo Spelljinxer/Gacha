@@ -25,7 +25,7 @@ For compilation and execution of this program:
 
 
 import sys, random, time, json
-from banners import five_star_chars, five_star_weapons, four_star_chars, four_star_weapons, three_star_weapons
+from banners import five_stars_chars, five_stars_weapons, four_stars_chars, four_stars_weapons, three_stars_weapons
 from inventory_parsing import read_inventory, reset_inventory, write_to_inventory
 
 
@@ -34,23 +34,26 @@ def exec_gacha(charname, banner, pull_num):
     soft_pity = 0
     hard_pity = 0
     pull_banner = []
+    banner_type = ""
     if(banner == "s" or banner == "l"):
         soft_pity = 75
-        pull_banner = five_star_chars
+        pull_banner = five_stars_chars
+        banner_type = "Characters"
     if(banner == "w"):
         soft_pity = 65
-        pull_banner = five_star_weapons
+        pull_banner = five_stars_weapons
+        banner_type = "Weapons"
 
     hard_pity = soft_pity + 15
 
     if(charname):
-        five_star_chars[-1] = charname
+        five_stars_chars[-1] = charname
     
     four_star_pity = 10
 
     while(pull_counter < pull_num):
         print("Pulling...")
-        time.sleep(0.5)
+        time.sleep(0.25)
         gacha_rate = random.uniform(0.0000, 1.00)
         
         #going to need to fix these to correspond with the actual genshin rates (math dansgame):
@@ -66,16 +69,17 @@ def exec_gacha(charname, banner, pull_num):
             print("four star pulled\n")
             pass
         
-        if(pull_counter == four_star_pity):
-            print("hard 4 star pity\n")
-            
+       
 
         if(pull_counter == hard_pity):
-            print("You've reached Hard Pity. You got: ", random.choice(pull_banner))
+            character = random.choice(pull_banner)
+            print("You've reached Hard Pity. You got: ", character)
+            
+            write_to_inventory(str(banner_type), "five_stars_chars", character)
             break
         
         else:
-            write_to_inventory("Weapons", "three_stars_weapons", random.choice(three_star_weapons))
+            write_to_inventory("Weapons", "three_stars_weapons", random.choice(three_stars_weapons))
         
         pull_counter += 1
     
@@ -99,7 +103,7 @@ def main():
             pull_num = int(sys.argv[2])
         banner = sys.argv[1][1]
         print(exec_gacha(charname, banner, pull_num))
-
+       
         s = input("Do you wish to see your current inventory? (y/n)\n")
 
         if(s == "y"):

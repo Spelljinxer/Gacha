@@ -13,7 +13,7 @@ This is utilised to store our characters and weapons in respective lists. Then i
 
 
 # -------------------------------CHARACTERS----------------------------------
-five_star_chars = [
+five_stars_chars = [
     "Diluc",
     "Jean",
     "Keqing",
@@ -21,7 +21,7 @@ five_star_chars = [
     "Qiqi"
 ]
 
-four_star_chars = [
+four_stars_chars = [
     "Amber",
     "Barbara",
     "Beidou",
@@ -49,7 +49,7 @@ four_star_chars = [
 ]
 
 # -------------------------------WEAPONS-------------------------------------
-five_star_weapons = [
+five_stars_weapons = [
     "Amos' Bow",
     "Skyward Harp",
     "Lost Prayer to the Sacred Winds",
@@ -61,7 +61,7 @@ five_star_weapons = [
     "Skyward Blade"
 ]
 
-four_star_weapons = [
+four_stars_weapons = [
     "Blackcliff Longsword",
     "Favonius Sword",
     "Iron Sting",
@@ -99,7 +99,7 @@ four_star_weapons = [
     "Mappa Mare"
 ]
 
-three_star_weapons = [
+three_stars_weapons = [
     "Amber Catalyst",
     "Black Tassel",
     "Bloodtainted Greatsword",
